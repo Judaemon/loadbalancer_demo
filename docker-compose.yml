@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginxtest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - web-app-1
+      - web-app-2
+
+  web-app-1:
+    image: httpd:latest
+    container_name: web-app-1
+    volumes:
+      - ./web-app-1:/usr/local/apache2/htdocs
+
+  web-app-2:
+    image: httpd:latest
+    container_name: web-app-2
+    volumes:
+      - ./web-app-2:/usr/local/apache2/htdocs
